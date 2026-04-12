@@ -1,367 +1,58 @@
-<!-- BigOffs Fake Landing Page - v2.0 - Workshop exercise for GitHub collaboration -->
+<!-- BigOffs Landing Page - v1.0 - Vite entry point -->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BigOffs - 创新科技，无限可能</title>
-  <style>
-    /* ===== Reset & Base ===== */
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-        "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
-      color: #1e293b;
-      background: #fff;
-    }
-
-    body {
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ===== Navbar ===== */
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 clamp(1.5rem, 5vw, 4rem);
-      height: 64px;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(26, 86, 219, 0.08);
-      transition: box-shadow 0.3s;
-    }
-
-    .navbar.scrolled {
-      box-shadow: 0 2px 20px rgba(26, 86, 219, 0.08);
-    }
-
-    .navbar-logo {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: #1a56db;
-      letter-spacing: -0.02em;
-      text-decoration: none;
-    }
-
-    .navbar-link {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: #475569;
-      text-decoration: none;
-      padding: 0.4rem 1rem;
-      border-radius: 8px;
-      transition: color 0.2s, background 0.2s;
-    }
-
-    .navbar-link:hover {
-      color: #1a56db;
-      background: rgba(26, 86, 219, 0.06);
-    }
-
-    /* ===== Hero Section ===== */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 6rem 2rem 4rem;
-      background: linear-gradient(
-        165deg,
-        #f0f5ff 0%,
-        #ffffff 40%,
-        #ffffff 60%,
-        #f0f5ff 100%
-      );
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Decorative background circles */
-    .hero::before,
-    .hero::after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      opacity: 0.08;
-      pointer-events: none;
-    }
-
-    .hero::before {
-      width: 600px;
-      height: 600px;
-      background: #1a56db;
-      top: -200px;
-      right: -150px;
-    }
-
-    .hero::after {
-      width: 400px;
-      height: 400px;
-      background: #1a56db;
-      bottom: -100px;
-      left: -100px;
-    }
-
-    .hero-logo {
-      font-size: clamp(3.5rem, 8vw, 6rem);
-      font-weight: 900;
-      color: #1a56db;
-      letter-spacing: -0.03em;
-      margin-bottom: 1.25rem;
-      position: relative;
-    }
-
-    .hero-tagline {
-      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-      color: #475569;
-      font-weight: 400;
-      max-width: 560px;
-      margin-bottom: 2.5rem;
-    }
-
-    .hero-cta {
-      display: inline-block;
-      padding: 0.85rem 2.5rem;
-      background: #1a56db;
-      color: #fff;
-      font-size: 1rem;
-      font-weight: 600;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-      box-shadow: 0 4px 14px rgba(26, 86, 219, 0.3);
-    }
-
-    .hero-cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(26, 86, 219, 0.4);
-      background: #1648b8;
-    }
-
-    /* ===== About Section ===== */
-    .about {
-      padding: 6rem 2rem 7rem;
-      background: #fff;
-    }
-
-    .about-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: clamp(1.75rem, 4vw, 2.5rem);
-      font-weight: 800;
-      color: #0f172a;
-      margin-bottom: 0.75rem;
-    }
-
-    .section-subtitle {
-      text-align: center;
-      font-size: 1.05rem;
-      color: #64748b;
-      margin-bottom: 3.5rem;
-      max-width: 480px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* ===== Employee Card Grid ===== */
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .card {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 2.5rem 1.5rem;
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-      /* Initial hidden state for animation */
-      opacity: 0;
-      transform: translateY(40px);
-    }
-
-    .card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(26, 86, 219, 0.1);
-      border-color: rgba(26, 86, 219, 0.2);
-    }
-
-    /* Avatar placeholder */
-    .card-avatar {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #1a56db 0%, #3b82f6 100%);
-      margin: 0 auto 1.25rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-size: 1.5rem;
-      font-weight: 700;
-    }
-
-    .card-name {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: #1e293b;
-    }
-
-    /* ===== Footer ===== */
-    .footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.85rem;
-      color: #94a3b8;
-      border-top: 1px solid #f1f5f9;
-    }
-
-    /* ===== Responsive ===== */
-    @media (max-width: 640px) {
-      .card-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-      }
-
-      .card {
-        padding: 2rem 1rem;
-      }
-
-      .card-avatar {
-        width: 56px;
-        height: 56px;
-        font-size: 1.2rem;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .card-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+  <title>BIGOFFS - 没啥就是便宜</title>
 </head>
 <body>
 
-  <!-- Navbar -->
+  <!-- Navigation bar -->
   <nav class="navbar" id="navbar">
-    <a href="#" class="navbar-logo">BigOffs</a>
-    <a href="#about" class="navbar-link">关于我们</a>
+    <a href="#" class="navbar-logo">BIGOFFS</a>
+    <div class="navbar-links">
+      <a href="#team" class="navbar-link">团队</a>
+      <a href="#about" class="navbar-link">关于我们</a>
+    </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- Hero section -->
   <section class="hero">
-    <h1 class="hero-logo">BigOffs</h1>
-    <p class="hero-tagline">创新科技，无限可能 — 以人工智能驱动未来，为每一位用户打造卓越体验。</p>
-    <a href="#about" class="hero-cta">认识我们的团队</a>
+    <h1 class="hero-title">BIGOFFS</h1>
+    <p class="hero-slogan">没啥就是便宜</p>
+    <p class="hero-description">品牌折扣新零售平台 — 百余品牌，1-3折，全场自助式购物</p>
+    <a href="#team" class="hero-cta">认识我们的团队</a>
   </section>
 
-  <!-- About Us Section -->
+  <!-- Team section - member cards loaded from public/members/*.html -->
+  <section class="team" id="team">
+    <div class="team-inner">
+      <h2 class="section-title">我们的团队</h2>
+      <p class="section-subtitle">来自不同背景的伙伴们，共同构筑 BIGOFFS 的未来</p>
+      <div class="card-grid" id="cardGrid">
+        <!-- Cards injected by JS from public/members/ -->
+      </div>
+    </div>
+  </section>
+
+  <!-- About section -->
   <section class="about" id="about">
     <div class="about-inner">
-      <h2 class="section-title">关于我们</h2>
-      <p class="section-subtitle">来自不同背景的伙伴们，共同构筑 BigOffs 的未来。</p>
-
-      <div class="card-grid" id="cardGrid">
-        <!-- Cards are generated by JS below -->
-      </div>
+      <h2 class="section-title">关于 BIGOFFS</h2>
+      <p class="about-text">
+        BIGOFFS 超级折扣是品牌折扣新零售平台，以全国统一采买为主要运营模式。
+        线下门店采取超级大卖场、快闪店、精品店等形式，囊括 adidas、NIKE 等百余品牌，
+        鞋履、服装、包包、配饰，全场1-3折，为用户提供线上线下一体化的购物体验。
+      </p>
     </div>
   </section>
 
   <!-- Footer -->
   <footer class="footer">
-    &copy; 2026 BigOffs. Built for learning &amp; collaboration.
+    &copy; 2026 BIGOFFS 超级折扣. Built for learning &amp; collaboration.
   </footer>
 
-  <script>
-    /* ===== Generate employee cards ===== */
-    (function () {
-      var names = [
-        "高新越", "王琳", "高若涵", "李莉", "Koi",
-        "陈冠宇", "赵红文", "Sharon", "Billy", "张静安", "鲁明"
-      ];
-      var grid = document.getElementById("cardGrid");
-      names.forEach(function (name, i) {
-        var card = document.createElement("div");
-        card.className = "card";
-        card.setAttribute("data-index", i + 1);
-        card.style.transitionProperty = "opacity, transform";
-        card.style.transitionDuration = "0.6s";
-        card.style.transitionTimingFunction = "cubic-bezier(0.22, 1, 0.36, 1)";
-        card.style.transitionDelay = i * 120 + "ms";
-
-        var initial = name.charAt(0).toUpperCase();
-        card.innerHTML =
-          '<div class="card-avatar">' + initial + "</div>" +
-          '<p class="card-name">' + name + "</p>";
-
-        grid.appendChild(card);
-      });
-    })();
-
-    /* ===== Intersection Observer for card entrance animations ===== */
-    (function () {
-      var cards = document.querySelectorAll(".card");
-
-      var observer = new IntersectionObserver(
-        function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.15 }
-      );
-
-      cards.forEach(function (card) {
-        observer.observe(card);
-      });
-    })();
-
-    /* ===== Navbar scroll shadow ===== */
-    (function () {
-      var navbar = document.getElementById("navbar");
-      window.addEventListener("scroll", function () {
-        if (window.scrollY > 10) {
-          navbar.classList.add("scrolled");
-        } else {
-          navbar.classList.remove("scrolled");
-        }
-      });
-    })();
-  </script>
-
+  <script type="module" src="/src/main.js"></script>
 </body>
 </html>

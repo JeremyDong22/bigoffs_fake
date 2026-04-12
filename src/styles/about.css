@@ -1,0 +1,33 @@
+/* about.css - v2.0 - About section with blue accent strip, yellow highlight footer */
+
+.about {
+  padding: 5rem 2rem;
+  background: var(--color-primary);
+  color: var(--color-text-on-dark);
+}
+
+.about-inner {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about .section-title {
+  color: var(--color-yellow);
+}
+
+.about-text {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.8;
+  margin-top: 2rem;
+}
+
+.footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  background: var(--color-yellow);
+  font-weight: 600;
+}

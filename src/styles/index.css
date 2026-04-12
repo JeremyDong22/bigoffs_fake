@@ -1,0 +1,6 @@
+/* index.css - v1.0 - Aggregates all style modules */
+@import './base.css';
+@import './navbar.css';
+@import './hero.css';
+@import './team.css';
+@import './about.css';

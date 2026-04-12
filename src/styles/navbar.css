@@ -1,0 +1,48 @@
+/* navbar.css - v2.0 - Blue navbar with yellow accents */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(1.5rem, 5vw, 4rem);
+  height: 64px;
+  background: var(--color-primary);
+  transition: box-shadow 0.3s;
+}
+
+.navbar.scrolled {
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--color-yellow);
+  letter-spacing: 0.05em;
+  text-decoration: none;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.navbar-link {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.navbar-link:hover {
+  color: var(--color-yellow);
+  background: rgba(255, 255, 255, 0.1);
+}
