@@ -1,83 +1,396 @@
 <!--
-  Jeremy's redirect page - v1.0
-  Displays a styled preview card when embedded in iframe,
-  redirects to personal website when visited directly.
+  Jeremy's personal introduction page - v2.0
+  Replaces the old redirect stub with a full self-contained profile page.
+  Content sourced from Jeremy's personal website (React portfolio).
+  Displays inline when embedded via iframe AND when visited directly.
 -->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jeremy - Personal Website</title>
-  <script>
-    // Redirect to personal website when opened directly (not in iframe)
-    if (window.top === window.self) {
-      window.location.href = 'https://jeremydong22.github.io';
-    }
-  </script>
+  <title>Jeremy Dong - 个人介绍</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* -- Reset & Base -- */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: linear-gradient(160deg, #0a0f1a 0%, #101829 50%, #0e1420 100%);
+      color: #e2e8f0;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a { color: #60a5fa; text-decoration: none; transition: color .2s; }
+    a:hover { color: #93bbfc; }
+
+    /* -- Layout -- */
+    .container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+
+    section {
+      padding: 3rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    section:last-of-type { border-bottom: none; }
+
+    /* -- Hero -- */
+    .hero {
       display: flex;
       align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      color: #f1f5f9;
-      overflow: hidden;
+      gap: 2.5rem;
+      padding: 3.5rem 0 2.5rem;
     }
-
-    .card {
-      text-align: center;
-      padding: 2rem;
-    }
-
-    .avatar {
-      width: 80px;
-      height: 80px;
+    .hero-photo {
+      width: 130px;
+      height: 130px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      object-fit: cover;
+      border: 3px solid rgba(59,130,246,.4);
+      box-shadow: 0 0 40px rgba(59,130,246,.15);
+      flex-shrink: 0;
+    }
+    .hero-info h1 {
       font-size: 2rem;
       font-weight: 700;
-      margin: 0 auto 1rem;
-      box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+      background: linear-gradient(135deg, #60a5fa, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-
-    .name {
-      font-size: 1.4rem;
-      font-weight: 600;
-      margin-bottom: 0.4rem;
-    }
-
-    .role {
-      font-size: 0.85rem;
+    .hero-info .tagline {
+      font-size: 1.05rem;
       color: #94a3b8;
-      margin-bottom: 1rem;
+      margin-top: .35rem;
+    }
+    .hero-links {
+      display: flex;
+      gap: .6rem;
+      margin-top: .8rem;
+      flex-wrap: wrap;
+    }
+    .hero-links a, .hero-links span {
+      display: inline-block;
+      padding: .3rem .85rem;
+      border-radius: 9999px;
+      font-size: .78rem;
+      background: rgba(59,130,246,.1);
+      border: 1px solid rgba(59,130,246,.25);
+      color: #93bbfc;
+      transition: background .2s;
+    }
+    .hero-links a:hover { background: rgba(59,130,246,.2); }
+
+    /* -- Section Titles -- */
+    .section-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .section-title::before {
+      content: '';
+      width: 4px;
+      height: 1.2em;
+      background: linear-gradient(180deg, #3b82f6, #8b5cf6);
+      border-radius: 2px;
     }
 
-    .link {
-      display: inline-block;
-      padding: 0.4rem 1.2rem;
-      border-radius: 9999px;
-      background: rgba(59, 130, 246, 0.15);
-      border: 1px solid rgba(59, 130, 246, 0.3);
+    /* -- Skills Grid -- */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.2rem;
+    }
+    .skill-card {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 12px;
+      padding: 1.3rem;
+      transition: border-color .2s, transform .2s;
+    }
+    .skill-card:hover {
+      border-color: rgba(59,130,246,.3);
+      transform: translateY(-2px);
+    }
+    .skill-card h3 {
+      font-size: .95rem;
+      font-weight: 600;
+      color: #93bbfc;
+      margin-bottom: .5rem;
+    }
+    .skill-card p {
+      font-size: .85rem;
+      color: #94a3b8;
+    }
+
+    /* -- Bio -- */
+    .bio p {
+      margin-bottom: 1rem;
+      color: #cbd5e1;
+      font-size: .92rem;
+    }
+
+    /* -- Timeline (Experience & Education) -- */
+    .timeline { list-style: none; position: relative; padding-left: 1.6rem; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: .5rem;
+      bottom: .5rem;
+      width: 2px;
+      background: linear-gradient(180deg, #3b82f6, #8b5cf6 60%, transparent);
+    }
+    .timeline li {
+      position: relative;
+      margin-bottom: 1.6rem;
+    }
+    .timeline li::before {
+      content: '';
+      position: absolute;
+      left: -1.6rem;
+      top: .55rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #3b82f6;
+      border: 2px solid #0a0f1a;
+    }
+    .timeline .role {
+      font-weight: 600;
+      font-size: .95rem;
+      color: #f1f5f9;
+    }
+    .timeline .company {
+      font-size: .85rem;
       color: #60a5fa;
-      font-size: 0.8rem;
-      text-decoration: none;
+    }
+    .timeline .period {
+      font-size: .78rem;
+      color: #64748b;
+      margin-bottom: .25rem;
+    }
+    .timeline .desc {
+      font-size: .83rem;
+      color: #94a3b8;
+      margin-top: .25rem;
+    }
+
+    /* -- Projects Highlights -- */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+    }
+    .project-card {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 12px;
+      padding: 1.3rem;
+      transition: border-color .2s, transform .2s;
+    }
+    .project-card:hover {
+      border-color: rgba(139,92,246,.3);
+      transform: translateY(-2px);
+    }
+    .project-card h3 {
+      font-size: .9rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      margin-bottom: .4rem;
+    }
+    .project-card p {
+      font-size: .8rem;
+      color: #94a3b8;
+      margin-bottom: .6rem;
+    }
+    .project-card .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35rem;
+    }
+    .project-card .tech-tags span {
+      font-size: .68rem;
+      padding: .15rem .5rem;
+      background: rgba(139,92,246,.12);
+      border: 1px solid rgba(139,92,246,.2);
+      border-radius: 9999px;
+      color: #c4b5fd;
+    }
+
+    /* -- Footer -- */
+    .footer {
+      text-align: center;
+      padding: 2rem 0;
+      font-size: .78rem;
+      color: #475569;
+    }
+
+    /* -- Responsive -- */
+    @media (max-width: 600px) {
+      .hero { flex-direction: column; text-align: center; gap: 1.2rem; }
+      .hero-links { justify-content: center; }
+      .hero-info h1 { font-size: 1.6rem; }
+      section { padding: 2rem 0; }
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="avatar">J</div>
-    <p class="name">Jeremy Dong</p>
-    <p class="role">点击查看个人网站 →</p>
-    <a class="link" href="https://jeremydong22.github.io" target="_top">jeremydong22.github.io</a>
+  <div class="container">
+
+    <!-- Hero -->
+    <header class="hero">
+      <img class="hero-photo" src="profile.jpeg" alt="Jeremy Dong" />
+      <div class="hero-info">
+        <h1>Jeremy Dong / 董衡</h1>
+        <p class="tagline">CSPO® · UIUC MSBA · 数据驱动 × AI 产品</p>
+        <div class="hero-links">
+          <a href="https://github.com/JeremyDong22" target="_blank">GitHub</a>
+          <a href="https://www.linkedin.com/in/jeremy-dong-176092256" target="_blank">LinkedIn</a>
+          <a href="mailto:hengd3@outlook.com">Email</a>
+          <a href="https://jeremydong22.github.io" target="_blank">个人网站 ↗</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Professional Skills -->
+    <section>
+      <h2 class="section-title">专业技能</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>数据科学与机器学习</h3>
+          <p>精通 Python、R、SQL 及机器学习算法（随机森林、提升算法、神经网络、因果分析）。熟练使用 NumPy、Pandas、Scikit-learn。</p>
+        </div>
+        <div class="skill-card">
+          <h3>商业分析</h3>
+          <p>在投资研究、财务分析和战略咨询方面经验丰富。专注于市场研究、成本分析和商业战略。</p>
+        </div>
+        <div class="skill-card">
+          <h3>AI 与自动化</h3>
+          <p>专注于利用 AI 进行敏捷开发，创建数据收集分析的自动化工作流程，帮助企业完成数字化转型与 AI 融合。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About / Bio -->
+    <section class="bio">
+      <h2 class="section-title">关于我</h2>
+      <p>作为一名认证 Scrum 产品负责人（CSPO®），我毕业于 UIUC，获得商业分析硕士和会计学士学位。我专注于数据驱动决策和商业战略，经验涵盖供应链、制造业、技术和金融服务领域，为成本优化和运营效率提供了有效的解决方案。</p>
+      <p>我对新兴技术充满热情，目前正在探索 AI 在业务流程优化中的应用。除了专业追求，我还领导着一支篮球队，研究运动学，并涉足美食烹饪和哲学讨论等多个领域，为工作带来全面的视角。</p>
+    </section>
+
+    <!-- Experience -->
+    <section>
+      <h2 class="section-title">工作经历</h2>
+      <ul class="timeline">
+        <li>
+          <p class="period">2025.04 - 至今</p>
+          <p class="role">Lead Researcher</p>
+          <p class="company">smartice.ai — AI 驱动餐饮管理</p>
+          <p class="desc">主导全栈 AI 产品开发，覆盖库存、培训、视觉检测、营销自动化和硬件。设计 Claude Code 驱动的 Agentic 开发工作流快速构建 MVP。</p>
+        </li>
+        <li>
+          <p class="period">2025.01 - 至今</p>
+          <p class="role">Growth Analyst Intern</p>
+          <p class="company">Source Ready — 供应链 SaaS 初创公司</p>
+          <p class="desc">通过 Reddit 策略和媒体合作将 Google SEO 提升 300%。使用 Crew.ai 和 AI 驱动的自动化方案执行增长策略。</p>
+        </li>
+        <li>
+          <p class="period">2024.08 - 至今</p>
+          <p class="role">Data Analyst</p>
+          <p class="company">US Pharmacopeia — 药品标准组织</p>
+          <p class="desc">使用 Python 开发 AI/ML 驱动的自动化数据采集工作流，跨 15 个网站、300 个关键词的爬取流水线。</p>
+        </li>
+        <li>
+          <p class="period">2024.07 - 2024.08</p>
+          <p class="role">Investment Researcher</p>
+          <p class="company">开封投资 — 公募基金</p>
+          <p class="desc">研究泛娱乐板块，利用 Perplexity AI 获取市场趋势，Wind 进行财务数据分析。深圳主要零售门店实地调研。</p>
+        </li>
+        <li>
+          <p class="period">2024.05 - 2024.06</p>
+          <p class="role">Investment Analyst Intern</p>
+          <p class="company">GYJA 私募 — 私募股权</p>
+          <p class="desc">使用 Wind/Bloomberg 进行制造业和能源行业研究，主导投资风控与尽职调查。</p>
+        </li>
+        <li>
+          <p class="period">2024.01 - 2024.05</p>
+          <p class="role">Cost Analyst</p>
+          <p class="company">Molex — 制造与电子</p>
+          <p class="desc">主导中国外替代制造地点的战略框架，开发集成经济与地理数据的成本模型，降低搬迁成本 20%。</p>
+        </li>
+        <li>
+          <p class="period">2023.06 - 2023.08</p>
+          <p class="role">Consultant Intern</p>
+          <p class="company">BDO Consulting — 全球咨询公司</p>
+          <p class="desc">主导 Infineon 和 Semikron 销售，产生 70 万美元原型订单，一周内签下合同。对德国竞争对手实现 60% 成本优势。</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Education -->
+    <section>
+      <h2 class="section-title">教育背景</h2>
+      <ul class="timeline">
+        <li>
+          <p class="period">2024.08 - 2025.05</p>
+          <p class="role">Master of Science in Business Analytics</p>
+          <p class="company">University of Illinois Urbana-Champaign</p>
+          <p class="desc">GPA: 3.7/4.0 — 商业分析、金融数据分析、机器学习等课程</p>
+        </li>
+        <li>
+          <p class="period">2021.08 - 2024.05</p>
+          <p class="role">Bachelor of Science in Accounting</p>
+          <p class="company">University of Illinois Urbana-Champaign</p>
+          <p class="desc">GPA: 3.9/4.0 — 三年提前毕业，涵盖会计、金融、商业分析等课程</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Featured Projects -->
+    <section>
+      <h2 class="section-title">代表项目</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3>野百灵库存管理系统</h3>
+          <p>连锁餐厅语音 AI 驱动的库存录入系统，讯飞 ASR + 通义千问结构化提取，4 角色 RBAC 权限控制。</p>
+          <div class="tech-tags">
+            <span>React 19</span><span>TypeScript</span><span>FastAPI</span><span>Supabase</span><span>iFlytek ASR</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <h3>卖油翁 B2B 含权贸易平台</h3>
+          <p>面向中国粮油含权贸易市场的全栈 B2B 平台，基差定价、资金流转、盈亏计算，Docker 一键部署。</p>
+          <div class="tech-tags">
+            <span>React</span><span>TypeScript</span><span>FastAPI</span><span>PostgreSQL</span><span>Docker</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <h3>小红书多账号爬取与 AI 标注</h3>
+          <p>全栈数据采集与 AI 标注平台，Playwright 多账号实例管理，Gemini Flash 图文分类，SSE 实时状态。</p>
+          <div class="tech-tags">
+            <span>Python</span><span>FastAPI</span><span>Playwright</span><span>Gemini</span><span>Next.js</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <h3>淘宝/天猫 AI 助手 MCP 服务器</h3>
+          <p>让 Claude 等 AI 助手直接调用工具爬取淘宝/天猫商品数据，持久化 Playwright Session 保持登录。</p>
+          <div class="tech-tags">
+            <span>Python</span><span>MCP</span><span>Playwright</span><span>Chromium</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>更多内容请访问 <a href="https://jeremydong22.github.io" target="_blank">jeremydong22.github.io</a></p>
+    </footer>
+
   </div>
 </body>
 </html>
