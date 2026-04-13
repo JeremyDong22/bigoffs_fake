@@ -15,11 +15,11 @@ import './styles/index.css';
 function createPreviewCard(member) {
   const card = document.createElement('a');
   card.className = 'card card-preview';
-  card.href = `/pages/${member.id}/`;
+  card.href = `/pages/${member.id}/index.html`;
 
   card.innerHTML =
     '<div class="card-iframe-wrapper">' +
-      `<iframe src="/pages/${member.id}/" tabindex="-1" loading="lazy"></iframe>` +
+      `<iframe src="/pages/${member.id}/index.html" tabindex="-1" loading="lazy"></iframe>` +
     '</div>' +
     `<p class="card-name">${member.name}</p>`;
 
