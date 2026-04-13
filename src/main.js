@@ -1,26 +1,15 @@
 /**
- * main.js - v2.0
+ * main.js - v3.0
  * Loads member registry, renders iframe preview cards for members
- * with personal pages, fallback avatar cards for others.
- * Click any card to navigate to the member's page.
+ * with personal pages (hasPage: true in index.json), fallback avatar cards for others.
  *
  * How to add yourself:
  * 1. Create your page folder in public/pages/<your-id>/index.html
- * 2. Add your entry to public/members/index.json
+ * 2. Add your entry to public/members/index.json with "hasPage": true
  * 3. Submit a PR
  */
 
 import './styles/index.css';
-
-/* Check if a member's personal page exists */
-async function pageExists(id) {
-  try {
-    const res = await fetch(`/pages/${id}/index.html`, { method: 'HEAD' });
-    return res.ok;
-  } catch {
-    return false;
-  }
-}
 
 /* Build a preview card with iframe thumbnail */
 function createPreviewCard(member) {
@@ -60,12 +49,7 @@ async function loadMembers() {
     const res = await fetch('/members/index.json');
     const members = await res.json();
 
-    /* Check which members have pages (in parallel) */
-    const checks = await Promise.all(
-      members.map(async (m) => ({ ...m, hasPage: await pageExists(m.id) }))
-    );
-
-    checks.forEach((member, i) => {
+    members.forEach((member, i) => {
       const card = member.hasPage
         ? createPreviewCard(member)
         : createFallbackCard(member);
