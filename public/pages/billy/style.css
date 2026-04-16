@@ -1,0 +1,300 @@
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0e0e0e;
+  --surface: #161616;
+  --border: rgba(255,255,255,0.07);
+  --text: #e8e4dc;
+  --muted: rgba(232,228,220,0.45);
+  --accent: #c9a96e;
+  --accent-dim: rgba(201,169,110,0.15);
+  --font-serif: 'Cormorant Garamond', 'Noto Serif SC', Georgia, serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── Noise texture overlay ── */
+.noise {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* ── Nav ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 4rem;
+  background: linear-gradient(to bottom, rgba(14,14,14,0.95), transparent);
+  backdrop-filter: blur(8px);
+}
+
+.nav-name {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2.5rem;
+}
+
+nav ul a {
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+nav ul a:hover { color: var(--text); }
+
+/* ── Hero ── */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 2rem 4rem;
+  position: relative;
+  border-bottom: 1px solid var(--border);
+}
+
+#hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 40%, rgba(201,169,110,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 2rem;
+}
+
+#hero h1 {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  line-height: 1.1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+#hero h1 .en {
+  font-size: clamp(3.5rem, 10vw, 8rem);
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+#hero h1 .zh {
+  font-size: clamp(1.8rem, 5vw, 3.5rem);
+  letter-spacing: 0.3em;
+  color: var(--muted);
+  font-family: 'Noto Serif SC', serif;
+}
+
+.hero-sub {
+  margin-top: 2rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  font-size: 1.2rem;
+  color: var(--muted);
+  animation: float 2.5s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50% { transform: translateY(6px); opacity: 0.9; }
+}
+
+/* ── Sections ── */
+section {
+  padding: 7rem 4rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.section-num {
+  display: block;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+}
+
+section h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  margin-bottom: 3rem;
+  color: var(--text);
+}
+
+/* ── About ── */
+.about-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.about-body p {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.9;
+}
+
+/* ── Interests ── */
+.interests-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.interest-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.interest-card:hover {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.interest-icon {
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 1.2rem;
+}
+
+.interest-card h3 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.1em;
+}
+
+.interest-card p {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ── Contact ── */
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+  transition: padding-left 0.3s;
+}
+
+a.contact-item:hover {
+  padding-left: 0.5rem;
+}
+
+a.contact-item:hover .contact-value {
+  color: var(--accent);
+}
+
+.contact-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--muted);
+  min-width: 80px;
+}
+
+.contact-value {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--text);
+  transition: color 0.3s;
+}
+
+/* ── Footer ── */
+footer {
+  padding: 3rem 4rem;
+  text-align: center;
+}
+
+footer p {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  nav { padding: 1.2rem 1.5rem; }
+  nav ul { gap: 1.5rem; }
+  section { padding: 5rem 1.5rem; }
+  footer { padding: 2rem 1.5rem; }
+
+  .about-body { grid-template-columns: 1fr; gap: 1.5rem; }
+  .interests-grid { grid-template-columns: 1fr; }
+
+  .contact-item { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+}
