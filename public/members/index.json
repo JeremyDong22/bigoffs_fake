@@ -1,7 +1,7 @@
 [
   { "name": "高新越", "id": "gao-xinyue" },
   { "name": "王琳", "id": "wang-lin" },
-  { "name": "高若涵", "id": "gao-ruohan" },
+  { "name": "高若涵", "id": "gao-ruohan", "hasPage": true },
   { "name": "李莉", "id": "li-li" },
   { "name": "Koi", "id": "koi" },
   { "name": "陈冠宇", "id": "chen-guanyu", "hasPage": true },
