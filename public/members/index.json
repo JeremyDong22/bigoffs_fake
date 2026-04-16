@@ -9,7 +9,7 @@
   { "name": "Sharon", "id": "sharon", "hasPage": true },
   { "name": "Billy", "id": "billy", "hasPage": true },
   { "name": "张静安", "id": "zhang-jingan" },
-  { "name": "鲁明", "id": "lu-ming" },
+  { "name": "鲁明", "id": "lu-ming", "hasPage": true },
   { "name": "Jeremy", "id": "jeremy", "hasPage": true },
   { "name": "Evan", "id": "evan", "hasPage": true }
 ]
