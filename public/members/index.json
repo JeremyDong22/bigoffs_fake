@@ -7,7 +7,7 @@
   { "name": "陈冠宇", "id": "chen-guanyu" },
   { "name": "赵红文", "id": "zhao-hongwen" },
   { "name": "Sharon", "id": "sharon" },
-  { "name": "Billy", "id": "billy" },
+  { "name": "Billy", "id": "billy", "hasPage": true },
   { "name": "张静安", "id": "zhang-jingan" },
   { "name": "鲁明", "id": "lu-ming" },
   { "name": "Jeremy", "id": "jeremy", "hasPage": true }
