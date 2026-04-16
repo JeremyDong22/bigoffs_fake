@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>博客 — Evan 鲁</title>
+  <script>
+    (function(){
+      var t = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav container">
+      <a href="index.html" class="nav__logo">Evan 鲁</a>
+      <ul class="nav__links">
+        <li><a href="index.html#projects">项目</a></li>
+        <li><a href="blog.html">文章</a></li>
+        <li><a href="index.html#contact">联系</a></li>
+      </ul>
+      <button class="nav__hamburger" id="navToggle" aria-label="展开导航" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换深色模式"></button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section container">
+      <h1 class="page-title">文章</h1>
+      <ul class="post-list post-list--full">
+
+        <li class="post-list__item">
+          <time class="post-list__date">2026年4月14日</time>
+          <div>
+            <a href="blog/post-template.html" class="post-list__title">这是一篇示例文章的标题</a>
+            <p class="post-list__excerpt">这里是文章的一句话摘要，让读者快速了解文章内容是否值得点进去阅读。</p>
+          </div>
+        </li>
+
+        <li class="post-list__item">
+          <time class="post-list__date">2026年3月20日</time>
+          <div>
+            <a href="blog/post-template.html" class="post-list__title">另一篇关于技术的思考</a>
+            <p class="post-list__excerpt">分享一些在日常开发中遇到的有趣问题和解决思路。</p>
+          </div>
+        </li>
+
+        <li class="post-list__item">
+          <time class="post-list__date">2026年2月5日</time>
+          <div>
+            <a href="blog/post-template.html" class="post-list__title">我是如何搭建这个网站的</a>
+            <p class="post-list__excerpt">用纯 HTML、CSS 和 JS 搭建个人网站的完整过程，以及为什么不用框架。</p>
+          </div>
+        </li>
+
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer container">
+    <span>© 2026 Evan 鲁</span>
+    <span>用 HTML、CSS 和 JS 构建，无框架依赖。</span>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
