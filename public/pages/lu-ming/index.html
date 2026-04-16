@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>鲁明 Simon - 个人介绍</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #f5f4f0;
+      --gold: #c9a84c;
+      --gray: #888;
+      --light: #e8e6e0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+
+    a { color: var(--gold); text-decoration: none; transition: color .2s; }
+    a:hover { opacity: 0.8; }
+
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
+
+    section {
+      padding: 3rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    section:last-of-type { border-bottom: none; }
+
+    /* Hero */
+    .hero {
+      padding: 4rem 0 3rem;
+      text-align: center;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-tag {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 1rem;
+    }
+    .hero h1 span { color: var(--gold); font-style: italic; }
+    .hero .tagline {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 1rem;
+      color: var(--gray);
+      margin-bottom: 2rem;
+    }
+
+    /* Section Titles */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .section-num {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 3px;
+    }
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 400;
+      letter-spacing: -0.5px;
+    }
+    .section-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      padding: 2rem 0;
+    }
+    .stat {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: border-color 0.3s;
+    }
+    .stat:hover { border-color: rgba(201,168,76,0.3); }
+    .stat-num {
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .stat-num sup { font-size: 1.2rem; vertical-align: super; }
+    .stat-label {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    /* Expertise Grid */
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    .expertise-card {
+      background: rgba(255,255,255,0.03);
+      padding: 2rem;
+      border-left: 3px solid transparent;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .expertise-card:hover {
+      background: rgba(201,168,76,0.05);
+      border-left-color: var(--gold);
+    }
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-bottom: 0.8rem;
+      letter-spacing: 0.5px;
+    }
+    .card-desc {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 0.9rem;
+      color: var(--gray);
+      line-height: 1.7;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 2.5rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.5rem;
+      bottom: 0.5rem;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--gold), rgba(201,168,76,0.1));
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.75rem;
+      top: 0.5rem;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 12px rgba(201,168,76,0.5);
+    }
+    .timeline-year {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 0.75rem;
+      color: var(--gold);
+      letter-spacing: 3px;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+    .timeline-role {
+      font-size: 1.3rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-desc {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 0.9rem;
+      color: var(--gray);
+      line-height: 1.7;
+      max-width: 600px;
+    }
+
+    /* Quote */
+    .quote-section {
+      background: rgba(201,168,76,0.04);
+      border-top: 1px solid rgba(201,168,76,0.15);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+    blockquote {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-weight: 300;
+      line-height: 1.6;
+      max-width: 700px;
+      margin: 0 auto 1.5rem;
+      color: var(--light);
+      font-style: italic;
+    }
+    blockquote::before {
+      content: '\201C';
+      color: var(--gold);
+      font-size: 3rem;
+      line-height: 0;
+      vertical-align: -1rem;
+      margin-right: 0.5rem;
+    }
+    .quote-author {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.5rem;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: border-color 0.3s;
+    }
+    .contact-item:hover { border-color: var(--gold); }
+    .contact-item-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      border: 1px solid rgba(201,168,76,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .contact-item-label {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.2rem;
+    }
+    .contact-item-value {
+      font-size: 0.95rem;
+      color: var(--light);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 2rem 0;
+      font-size: 0.75rem;
+      color: var(--gray);
+      font-family: 'Helvetica Neue', sans-serif;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .stats { grid-template-columns: 1fr; }
+      .expertise-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      section { padding: 2rem 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Hero -->
+    <header class="hero">
+      <div class="hero-tag">Chief Executive Officer</div>
+      <h1>鲁明 <span>Simon</span></h1>
+      <p class="tagline">零售与电商双轨领航者 · 供应链资源整合专家</p>
+    </header>
+
+    <!-- Stats -->
+    <section>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-num">20<sup>+</sup></div>
+          <div class="stat-label">年从业经验</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">500<sup>+</sup></div>
+          <div class="stat-label">零售终端门店</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">全链路</div>
+          <div class="stat-label">供应链资源整合</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Expertise -->
+    <section>
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2 class="section-title">核心优势</h2>
+      </div>
+      <div class="expertise-grid">
+        <div class="expertise-card">
+          <span class="card-icon">🏪</span>
+          <h3 class="card-title">传统零售深耕</h3>
+          <p class="card-desc">
+            二十余年传统零售从业经验，深度理解线下消费场景与用户行为，
+            熟悉品类管理、陈列运营与门店标准化体系建设。
+          </p>
+        </div>
+        <div class="expertise-card">
+          <span class="card-icon">📦</span>
+          <h3 class="card-title">供应链资源整合</h3>
+          <p class="card-desc">
+            广泛的供应链合作网络，覆盖生产、仓储、物流全环节，
+            具备快速响应市场变化、降本增效的实战能力。
+          </p>
+        </div>
+        <div class="expertise-card">
+          <span class="card-icon">🛒</span>
+          <h3 class="card-title">电子商务实战</h3>
+          <p class="card-desc">
+            深度参与电商平台运营与品牌数字化转型，
+            打通线上线下数据链路，实现全渠道协同增长。
+          </p>
+        </div>
+        <div class="expertise-card">
+          <span class="card-icon">🗺️</span>
+          <h3 class="card-title">全国终端网络</h3>
+          <p class="card-desc">
+            遍布中国的零售终端门店布局，覆盖一线至下沉市场，
+            为品牌提供快速落地与规模化扩张的渠道支撑。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quote -->
+    <div class="quote-section">
+      <blockquote>
+        线上与线下从不对立，供应链与终端门店是品牌真正的护城河。
+      </blockquote>
+      <div class="quote-author">— Simon，CEO</div>
+    </div>
+
+    <!-- Journey -->
+    <section>
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2 class="section-title">从业历程</h2>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">传统零售阶段</div>
+          <div class="timeline-role">零售运营管理</div>
+          <p class="timeline-desc">
+            从门店一线起步，历经品类管理、区域拓展到全国运营，
+            建立起覆盖全国的零售终端网络，积累深厚的线下渠道资源。
+          </p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">供应链整合阶段</div>
+          <div class="timeline-role">供应链体系建设</div>
+          <p class="timeline-desc">
+            主导供应链数字化改造，整合上游生产资源与下游分销渠道，
+            构建高效、弹性的全链路供应体系，显著提升周转效率。
+          </p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">电商转型阶段</div>
+          <div class="timeline-role">电子商务战略布局</div>
+          <p class="timeline-desc">
+            深度参与主流电商平台运营，推动品牌线上化转型，
+            实现线上线下双渠道协同，打造全渠道零售新模式。
+          </p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">现在</div>
+          <div class="timeline-role">CEO · 双轨驱动</div>
+          <p class="timeline-desc">
+            以传统零售根基为底座，以电商思维为引擎，
+            整合供应链与终端资源，带领团队持续创造商业价值。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section>
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2 class="section-title">联系方式</h2>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="contact-item-icon">✉</div>
+          <div>
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-value">simon@example.com</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📱</div>
+          <div>
+            <div class="contact-item-label">微信 / WeChat</div>
+            <div class="contact-item-value">simon_ceo</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div>
+            <div class="contact-item-label">Location</div>
+            <div class="contact-item-value">中国</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>© 2026 鲁明 Simon. All rights reserved.</p>
+    </footer>
+
+  </div>
+</body>
+</html>
