@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cynthia - 个人介绍</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: linear-gradient(160deg, #0a0f1a 0%, #101829 50%, #0e1420 100%);
+      color: #e2e8f0;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a { color: #c9a96e; text-decoration: none; transition: color .2s; }
+    a:hover { color: #e8d5b0; }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+
+    section {
+      padding: 3rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    section:last-of-type { border-bottom: none; }
+
+    /* Hero */
+    .hero {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      padding: 3.5rem 0 2.5rem;
+    }
+    .hero-avatar {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #c9a96e, #8a6a3a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      flex-shrink: 0;
+      border: 3px solid rgba(201,169,110,.4);
+      box-shadow: 0 0 40px rgba(201,169,110,.15);
+    }
+    .hero-info h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #c9a96e, #e8d5b0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-info .tagline {
+      font-size: 1.05rem;
+      color: #94a3b8;
+      margin-top: .35rem;
+    }
+    .hero-links {
+      display: flex;
+      gap: .6rem;
+      margin-top: .8rem;
+      flex-wrap: wrap;
+    }
+    .hero-links a, .hero-links span {
+      display: inline-block;
+      padding: .3rem .85rem;
+      border-radius: 9999px;
+      font-size: .78rem;
+      background: rgba(201,169,110,.1);
+      border: 1px solid rgba(201,169,110,.25);
+      color: #c9a96e;
+      transition: background .2s;
+    }
+    .hero-links a:hover { background: rgba(201,169,110,.2); }
+
+    /* Section Titles */
+    .section-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .section-title::before {
+      content: '';
+      width: 4px;
+      height: 1.2em;
+      background: linear-gradient(180deg, #c9a96e, #8a6a3a);
+      border-radius: 2px;
+    }
+
+    /* Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1.2rem;
+    }
+    .stat-card {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(201,169,110,.15);
+      border-radius: 12px;
+      padding: 1.3rem;
+      text-align: center;
+    }
+    .stat-num {
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: #c9a96e;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: .75rem;
+      color: #94a3b8;
+      margin-top: .4rem;
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.2rem;
+    }
+    .skill-card {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 12px;
+      padding: 1.3rem;
+      transition: border-color .2s, transform .2s;
+    }
+    .skill-card:hover {
+      border-color: rgba(201,169,110,.3);
+      transform: translateY(-2px);
+    }
+    .skill-num {
+      font-size: .75rem;
+      color: #c9a96e;
+      opacity: .6;
+      margin-bottom: .5rem;
+    }
+    .skill-card h3 {
+      font-size: .95rem;
+      font-weight: 600;
+      color: #c9a96e;
+      margin-bottom: .2rem;
+    }
+    .skill-card .cn {
+      font-size: .75rem;
+      color: rgba(201,169,110,.6);
+      margin-bottom: .5rem;
+    }
+    .skill-card p {
+      font-size: .82rem;
+      color: #94a3b8;
+    }
+
+    /* Bio */
+    .bio p {
+      margin-bottom: 1rem;
+      color: #cbd5e1;
+      font-size: .92rem;
+    }
+    .bio-cn {
+      border-left: 2px solid rgba(201,169,110,.4);
+      padding-left: 1rem;
+      margin-top: 1.2rem;
+      color: rgba(203,213,225,.6) !important;
+      font-size: .85rem !important;
+    }
+
+    /* Timeline */
+    .timeline { list-style: none; position: relative; padding-left: 1.6rem; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: .5rem; bottom: .5rem;
+      width: 2px;
+      background: linear-gradient(180deg, #c9a96e, #8a6a3a 60%, transparent);
+    }
+    .timeline li {
+      position: relative;
+      margin-bottom: 1.6rem;
+    }
+    .timeline li::before {
+      content: '';
+      position: absolute;
+      left: -1.6rem; top: .55rem;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: #c9a96e;
+      border: 2px solid #0a0f1a;
+    }
+    .timeline .role {
+      font-weight: 600;
+      font-size: .95rem;
+      color: #f1f5f9;
+    }
+    .timeline .company {
+      font-size: .85rem;
+      color: #c9a96e;
+    }
+    .timeline .period {
+      font-size: .78rem;
+      color: #64748b;
+      margin-bottom: .25rem;
+    }
+    .timeline .desc {
+      font-size: .83rem;
+      color: #94a3b8;
+      margin-top: .25rem;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 2rem 0;
+      font-size: .78rem;
+      color: #475569;
+    }
+
+    @media (max-width: 600px) {
+      .hero { flex-direction: column; text-align: center; gap: 1.2rem; }
+      .hero-links { justify-content: center; }
+      .hero-info h1 { font-size: 1.6rem; }
+      section { padding: 2rem 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Hero -->
+    <header class="hero">
+      <div class="hero-avatar">👗</div>
+      <div class="hero-info">
+        <h1>Cynthia · 高新越</h1>
+        <p class="tagline">服装行业资深专家 · 14 Years in Fashion</p>
+        <div class="hero-links">
+          <a href="mailto:hello@cynthia.com">Email</a>
+          <span>WeChat: Cynthia_Fashion</span>
+          <a href="#">LinkedIn</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Stats -->
+    <section>
+      <h2 class="section-title">数字说话</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-num">14+</div>
+          <div class="stat-label">行业经验年限<br>Years of Experience</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">50+</div>
+          <div class="stat-label">服务品牌数量<br>Brands Served</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">∞</div>
+          <div class="stat-label">对时尚的热情<br>Passion for Fashion</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Expertise -->
+    <section>
+      <h2 class="section-title">专业领域</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-num">01</div>
+          <h3>Brand Strategy</h3>
+          <div class="cn">品牌战略</div>
+          <p>打造品牌核心定位与市场策略，将创意视野转化为可持续的商业增长。</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-num">02</div>
+          <h3>Retail Development</h3>
+          <div class="cn">零售拓展</div>
+          <p>深度理解零售动态，从门店概念、陈列设计到销售业绩优化全链路把控。</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-num">03</div>
+          <h3>Commercial Curation</h3>
+          <div class="cn">商业体运营</div>
+          <p>丰富的商业综合体合作经验，精准策划时尚品牌组合，提升整体购物体验。</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-num">04</div>
+          <h3>Trend Forecasting</h3>
+          <div class="cn">趋势预测</div>
+          <p>将全球时尚趋势转化为中国市场的可落地洞察，助力品牌抢占先机。</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-num">05</div>
+          <h3>Buyer Expertise</h3>
+          <div class="cn">买手专业</div>
+          <p>资深买手经验，精准选品、供应商谈判与库存规划，眼光独到。</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-num">06</div>
+          <h3>Industry Consulting</h3>
+          <div class="cn">行业咨询</div>
+          <p>为新兴及成熟时尚企业提供战略指导，助力品牌在复杂市场中找准方向。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="bio">
+      <h2 class="section-title">关于我</h2>
+      <p>深耕服装行业14年，服务过众多品牌公司及商业体，积累了丰富的行业经验。擅长将创意视野与商业价值有机结合，为品牌创造独特的市场竞争力。</p>
+      <p class="bio-cn">With 14 years of deep-rooted experience in the fashion industry, Cynthia has built a distinguished career spanning brand strategy, retail development, and commercial space curation. Her expertise bridges the gap between creative vision and commercial success.</p>
+    </section>
+
+    <!-- Experience -->
+    <section>
+      <h2 class="section-title">工作经历</h2>
+      <ul class="timeline">
+        <li>
+          <p class="period">2020 — 至今</p>
+          <p class="role">Senior Fashion Consultant</p>
+          <p class="company">独立顾问 · Independent</p>
+          <p class="desc">为时尚品牌及商业地产开发商提供战略咨询，专注于品牌定位、零售策略及中国时尚市场进入策略。</p>
+        </li>
+        <li>
+          <p class="period">2015 — 2020</p>
+          <p class="role">Head Buyer & Brand Director</p>
+          <p class="company">多品牌时尚集团 · Multi-Brand Fashion Group</p>
+          <p class="desc">主导国际及国内时尚品牌的买手运营与品牌发展，统筹季节性系列、供应商关系及商业业绩。</p>
+        </li>
+        <li>
+          <p class="period">2012 — 2015</p>
+          <p class="role">Fashion Buyer</p>
+          <p class="company">商业综合体 · Commercial Complex</p>
+          <p class="desc">负责大型商业综合体时尚品类买手工作，通过战略性品牌引进与陈列规划推动品类增长。</p>
+        </li>
+        <li>
+          <p class="period">2010 — 2012</p>
+          <p class="role">Brand Coordinator</p>
+          <p class="company">服装品牌公司 · Fashion Brand Company</p>
+          <p class="desc">职业起点，在产品开发、视觉陈列和零售运营方面建立了扎实的专业基础。</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>© 2026 Cynthia · 服装行业专家 · Fashion Industry Professional</p>
+    </footer>
+
+  </div>
+</body>
+</html>

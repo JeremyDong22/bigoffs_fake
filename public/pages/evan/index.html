@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evan 鲁 — 开发者</title>
+  <script>
+    (function(){
+      var t = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav container">
+      <a href="index.html" class="nav__logo">Evan 鲁</a>
+      <ul class="nav__links">
+        <li><a href="#projects">项目</a></li>
+        <li><a href="#blog">文章</a></li>
+        <li><a href="#contact">联系</a></li>
+      </ul>
+      <button class="nav__hamburger" id="navToggle" aria-label="展开导航" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换深色模式"></button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="hero container">
+      <p class="hero__eyebrow">你好，我是</p>
+      <h1 class="hero__name">Evan 鲁</h1>
+      <p class="hero__tagline">Welcome To My World！:)</p>
+      <div class="hero__cta">
+        <a href="#projects" class="btn btn--primary">查看项目</a>
+        <a href="blog.html" class="btn btn--ghost">阅读博客 →</a>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="section section--alt" id="projects">
+      <div class="container">
+        <h2 class="section__title">项目</h2>
+        <div class="card-grid">
+
+          <article class="card">
+            <div class="card__header">
+              <span class="card__tag">开源</span>
+              <div class="card__links">
+                <a href="#" aria-label="GitHub 仓库">GitHub ↗</a>
+                <a href="#" aria-label="在线演示">Demo ↗</a>
+              </div>
+            </div>
+            <h3 class="card__title">项目名称一</h3>
+            <p class="card__desc">简短描述这个项目做了什么，解决了什么问题，以及为什么值得关注。</p>
+            <ul class="card__stack">
+              <li>TypeScript</li><li>Node.js</li><li>PostgreSQL</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="card__header">
+              <span class="card__tag">个人项目</span>
+              <div class="card__links">
+                <a href="#" aria-label="GitHub 仓库">GitHub ↗</a>
+              </div>
+            </div>
+            <h3 class="card__title">项目名称二</h3>
+            <p class="card__desc">简短描述这个项目做了什么，解决了什么问题，以及为什么值得关注。</p>
+            <ul class="card__stack">
+              <li>React</li><li>Tailwind</li><li>Vercel</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="card__header">
+              <span class="card__tag">工具</span>
+              <div class="card__links">
+                <a href="#" aria-label="GitHub 仓库">GitHub ↗</a>
+                <a href="#" aria-label="在线演示">Demo ↗</a>
+              </div>
+            </div>
+            <h3 class="card__title">项目名称三</h3>
+            <p class="card__desc">简短描述这个项目做了什么，解决了什么问题，以及为什么值得关注。</p>
+            <ul class="card__stack">
+              <li>Python</li><li>FastAPI</li><li>Docker</li>
+            </ul>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog preview -->
+    <section class="section" id="blog">
+      <div class="container">
+        <h2 class="section__title">近期文章</h2>
+        <ul class="post-list">
+          <li class="post-list__item">
+            <time class="post-list__date">2026年4月</time>
+            <a href="blog/post-template.html" class="post-list__title">这是一篇示例文章的标题</a>
+          </li>
+          <li class="post-list__item">
+            <time class="post-list__date">2026年3月</time>
+            <a href="blog/post-template.html" class="post-list__title">另一篇关于技术的思考</a>
+          </li>
+          <li class="post-list__item">
+            <time class="post-list__date">2026年2月</time>
+            <a href="blog/post-template.html" class="post-list__title">我是如何搭建这个网站的</a>
+          </li>
+        </ul>
+        <div style="margin-top: 2rem;">
+          <a href="blog.html" class="btn btn--ghost">所有文章 →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section section--alt" id="contact">
+      <div class="container container--narrow">
+        <h2 class="section__title">联系我</h2>
+        <p style="color: var(--muted); margin-bottom: 2rem;">
+          欢迎聊聊有趣的项目、合作机会，或者只是打个招呼。
+        </p>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="mailto:you@example.com" class="btn btn--primary">发邮件</a>
+          <a href="https://github.com/" target="_blank" rel="noopener" class="btn btn--ghost">GitHub</a>
+          <a href="https://twitter.com/" target="_blank" rel="noopener" class="btn btn--ghost">Twitter</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer container">
+    <span>© 2026 Evan 鲁</span>
+    <span>用 HTML、CSS 和 JS 构建，无框架依赖。</span>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
