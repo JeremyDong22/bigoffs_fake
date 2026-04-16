@@ -1,14 +1,15 @@
 [
-  { "name": "高新越", "id": "gao-xinyue" },
-  { "name": "王琳", "id": "wang-lin" },
-  { "name": "高若涵", "id": "gao-ruohan" },
-  { "name": "李莉", "id": "li-li" },
+  { "name": "高新越", "id": "gao-xinyue", "hasPage": true },
+  { "name": "王琳 Linda", "id": "wang-lin", "hasPage": true },
+  { "name": "高若涵", "id": "gao-ruohan", "hasPage": true },
+  { "name": "李莉", "id": "li-li", "hasPage": true },
   { "name": "Koi", "id": "koi" },
-  { "name": "陈冠宇", "id": "chen-guanyu" },
+  { "name": "陈冠宇", "id": "chen-guanyu", "hasPage": true },
   { "name": "赵红文", "id": "zhao-hongwen" },
-  { "name": "Sharon", "id": "sharon" },
-  { "name": "Billy", "id": "billy" },
+  { "name": "Sharon", "id": "sharon", "hasPage": true },
+  { "name": "Billy", "id": "billy", "hasPage": true },
   { "name": "张静安", "id": "zhang-jingan" },
   { "name": "鲁明", "id": "lu-ming", "hasPage": true },
-  { "name": "Jeremy", "id": "jeremy", "hasPage": true }
+  { "name": "Jeremy", "id": "jeremy", "hasPage": true },
+  { "name": "Evan", "id": "evan", "hasPage": true }
 ]

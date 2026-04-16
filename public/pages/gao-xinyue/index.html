@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>高新越 | 采销经理 · 时装买手</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #1e293b; background: #fff; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      background: rgba(15,23,42,0.95); backdrop-filter: blur(8px);
+      padding: 16px 24px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    nav .brand { color: #fff; font-weight: 700; font-size: 18px; }
+    nav .links { display: flex; gap: 32px; }
+    nav .links a { color: #94a3b8; font-size: 14px; transition: color 0.2s; }
+    nav .links a:hover { color: #f59e0b; }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+      display: flex; align-items: center;
+      padding: 120px 24px 60px;
+    }
+    .hero-inner { max-width: 900px; margin: 0 auto; width: 100%; }
+    .hero-tag { color: #f59e0b; font-size: 13px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 16px; }
+    .hero h1 { font-size: clamp(64px, 10vw, 96px); font-weight: 800; color: #fff; line-height: 1; margin-bottom: 24px; }
+    .hero-desc { color: #cbd5e1; font-size: 17px; line-height: 1.8; max-width: 680px; margin-bottom: 40px; }
+
+    .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; max-width: 480px; }
+    .metric { border: 1px solid #334155; border-radius: 12px; padding: 20px; text-align: center; background: rgba(30,41,59,0.5); }
+    .metric-num { font-size: 32px; font-weight: 800; color: #f59e0b; }
+    .metric-label { color: #64748b; font-size: 13px; margin-top: 4px; }
+
+    .contact-row { display: flex; flex-wrap: wrap; gap: 24px; color: #94a3b8; font-size: 14px; margin-bottom: 32px; }
+    .contact-row a:hover { color: #f59e0b; }
+
+    .btn-row { display: flex; flex-wrap: wrap; gap: 16px; }
+    .btn-primary { background: #f59e0b; color: #0f172a; font-weight: 700; padding: 14px 32px; border-radius: 10px; font-size: 15px; transition: background 0.2s, transform 0.2s; }
+    .btn-primary:hover { background: #fbbf24; transform: scale(1.03); }
+    .btn-outline { border: 1px solid #475569; color: #cbd5e1; font-weight: 700; padding: 14px 32px; border-radius: 10px; font-size: 15px; transition: border-color 0.2s, color 0.2s; }
+    .btn-outline:hover { border-color: #f59e0b; color: #f59e0b; }
+
+    /* ── Sections ── */
+    section { padding: 96px 24px; }
+    .section-inner { max-width: 900px; margin: 0 auto; }
+    .section-header { margin-bottom: 48px; }
+    .section-tag { color: #f59e0b; font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 8px; }
+    .section-title { font-size: 36px; font-weight: 800; color: #1e293b; margin-bottom: 16px; }
+    .section-line { width: 64px; height: 4px; background: #f59e0b; border-radius: 2px; }
+    .bg-white { background: #fff; }
+    .bg-slate { background: #f8fafc; }
+
+    /* Skills */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 24px; }
+    .skill-card { border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; transition: border-color 0.2s, box-shadow 0.2s; }
+    .skill-card:hover { border-color: #fde68a; box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+    .skill-icon { font-size: 28px; margin-bottom: 16px; }
+    .skill-title { font-size: 16px; font-weight: 700; color: #1e293b; margin-bottom: 10px; }
+    .skill-desc { color: #64748b; font-size: 13px; line-height: 1.7; }
+
+    /* Experience */
+    .exp-card { background: #fff; border-radius: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); margin-bottom: 32px; overflow: hidden; }
+    .exp-header { background: linear-gradient(90deg, #1e293b, #334155); padding: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 16px; }
+    .exp-title { font-size: 20px; font-weight: 700; color: #fff; }
+    .exp-company { color: #f59e0b; font-weight: 600; margin-top: 4px; }
+    .exp-dept { color: #94a3b8; font-size: 13px; margin-top: 4px; }
+    .exp-badge { background: rgba(245,158,11,0.15); color: #f59e0b; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 99px; white-space: nowrap; }
+    .exp-loc { color: #94a3b8; font-size: 13px; margin-top: 8px; text-align: right; }
+    .exp-body { padding: 24px; }
+    .exp-body ul { list-style: none; }
+    .exp-body li { display: flex; align-items: flex-start; gap: 12px; color: #475569; font-size: 14px; line-height: 1.7; margin-bottom: 12px; }
+    .exp-body li::before { content: '▸'; color: #f59e0b; flex-shrink: 0; margin-top: 1px; }
+
+    /* Projects */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
+    .proj-card { border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; transition: box-shadow 0.2s; }
+    .proj-card:hover { box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
+    .proj-header { background: linear-gradient(135deg, #f59e0b, #d97706); padding: 24px; }
+    .proj-title { font-size: 16px; font-weight: 700; color: #fff; }
+    .proj-meta { color: #fef3c7; font-size: 13px; margin-top: 6px; }
+    .proj-body { padding: 24px; }
+    .proj-label { color: #94a3b8; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+    .proj-text { color: #475569; font-size: 13px; line-height: 1.7; margin-bottom: 16px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .tag { background: #f1f5f9; color: #475569; font-size: 12px; padding: 4px 10px; border-radius: 6px; }
+
+    /* Education */
+    .edu-card { background: #fff; border-radius: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); padding: 40px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center; }
+    .edu-school { font-size: 26px; font-weight: 800; color: #1e293b; }
+    .edu-badge { color: #f59e0b; font-weight: 600; margin-top: 4px; }
+    .edu-item label { color: #94a3b8; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 4px; }
+    .edu-item p { color: #1e293b; font-weight: 700; font-size: 17px; }
+
+    /* Contact */
+    .contact-section { background: #0f172a; }
+    .contact-section .section-tag { color: #f59e0b; }
+    .contact-section .section-title { color: #fff; }
+    .contact-section .section-line { background: #f59e0b; }
+    .contact-section .section-header { text-align: center; }
+    .contact-desc { color: #64748b; font-size: 17px; margin-bottom: 48px; text-align: center; }
+    .contact-cards { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; }
+    .contact-card { display: flex; align-items: center; gap: 16px; background: #1e293b; padding: 24px 32px; border-radius: 14px; transition: background 0.2s, transform 0.2s; }
+    .contact-card:hover { background: #334155; transform: scale(1.03); }
+    .contact-icon { font-size: 28px; }
+    .contact-card-label { color: #64748b; font-size: 12px; }
+    .contact-card-val { color: #fff; font-weight: 600; font-size: 15px; }
+    footer { text-align: center; color: #334155; font-size: 13px; margin-top: 64px; padding-top: 32px; border-top: 1px solid #1e293b; }
+
+    @media (max-width: 640px) {
+      nav .links { display: none; }
+      .metrics { grid-template-columns: 1fr 1fr; }
+      .edu-card { flex-direction: column; gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <span class="brand">高新越</span>
+  <div class="links">
+    <a href="#about">核心优势</a>
+    <a href="#experience">工作经历</a>
+    <a href="#projects">项目经历</a>
+    <a href="#education">教育背景</a>
+    <a href="#contact">联系我</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-inner">
+    <p class="hero-tag">采销经理 · 时装买手</p>
+    <h1>高新越</h1>
+    <p class="hero-desc">
+      互联网电商运营 + 时装产品买手双背景，10年+专业买手经验。
+      深耕京东孕产服饰品类运营，擅长品类增长策略、商家赋能与供应链精细化管理，
+      善于在复杂市场环境下寻找增量机会。
+    </p>
+    <div class="metrics">
+      <div class="metric"><div class="metric-num">10年+</div><div class="metric-label">时装买手经验</div></div>
+      <div class="metric"><div class="metric-num">693%</div><div class="metric-label">标杆商家GMV增长</div></div>
+      <div class="metric"><div class="metric-num">1400+</div><div class="metric-label">年度SPU开发</div></div>
+    </div>
+    <div class="contact-row">
+      <span>📍 北京</span>
+      <a href="mailto:gaoxinyue71@hotmail.com">✉️ gaoxinyue71@hotmail.com</a>
+
+    </div>
+    <div class="btn-row">
+      <a href="#experience" class="btn-primary">查看工作经历</a>
+      <a href="#contact" class="btn-outline">联系我</a>
+    </div>
+  </div>
+</div>
+
+<!-- Skills -->
+<section id="about" class="bg-white">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-tag">STRENGTHS</p>
+      <h2 class="section-title">核心优势</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">📊</div>
+        <div class="skill-title">品类运营</div>
+        <div class="skill-desc">主导京东母婴孕产服饰品类，核心类目同比增长10%+（行业双位数下滑背景下），自营连续三季度增长30%+</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">👗</div>
+        <div class="skill-title">时装买手</div>
+        <div class="skill-desc">10年+专业买手经验，深耕绫致时装（BESTSELLER集团），精通流行趋势分析与产品开发全流程管理</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🔗</div>
+        <div class="skill-title">供应链管理</div>
+        <div class="skill-desc">统筹1400+ SPU年度开发，全年下单125万件，熟悉PLM/SCM系统，建立快反供应商体系</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🚀</div>
+        <div class="skill-title">商家赋能</div>
+        <div class="skill-desc">构建团长运营体系，标杆商家GMV同比增长693%，中腰部商家贡献度提升7.2%</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">📈</div>
+        <div class="skill-title">数据驱动</div>
+        <div class="skill-desc">建立三维选品模型，精准锁定高潜力款；推行SKU末位淘汰制，单SKU坑产提升40%</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🌐</div>
+        <div class="skill-title">英语CET-6</div>
+        <div class="skill-desc">熟练听说读写，具备国际化品牌工作经验，熟悉国际时装行业工作语言与规范</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section id="experience" class="bg-slate">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-tag">EXPERIENCE</p>
+      <h2 class="section-title">工作经历</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-title">采销经理</div>
+          <div class="exp-company">北京京东世纪贸易有限公司</div>
+          <div class="exp-dept">母婴业务部</div>
+        </div>
+        <div>
+          <span class="exp-badge">2023.06 — 至今</span>
+          <div class="exp-loc">📍 北京</div>
+        </div>
+      </div>
+      <div class="exp-body">
+        <ul>
+          <li>主导孕产服饰品类运营，实现核心类目同比增长 10%+（行业呈双位数下滑）</li>
+          <li>自营核心类目连续三季度实现 30%+ 增长，POP 业务增长 5%，拉动平台市占率提升</li>
+          <li>3个月内将站外渠道销售占比从 13% 提升至 30%，从0到1搭建完整团长运营体系</li>
+          <li>推行SKU末位淘汰制，精简低效SKU 25%，单SKU坑产提升40%，综合毛利率提升0.42pp</li>
+          <li>主导20+核心供应商合同谈判，优化结算方式，提升资金周转效率</li>
+          <li>培育标杆白牌商家日销从3千突破至2万+，月销突破43万，GMV同比增长693%</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-title">买手经理 / 高级买手</div>
+          <div class="exp-company">绫致时装（天津）有限公司</div>
+          <div class="exp-dept">买手业务部</div>
+        </div>
+        <div>
+          <span class="exp-badge">2010.03 — 2023.04</span>
+          <div class="exp-loc">📍 北京</div>
+        </div>
+      </div>
+      <div class="exp-body">
+        <ul>
+          <li>从实习买手成长为产品经理，统筹负责针织品类货盘管理，带领10+人买手团队</li>
+          <li>全年统筹超1400 SPU开发与下单，全年下单量约125万件</li>
+          <li>针织品类质检通过率提升7%，利润倍率提升3%；毛衣品类质检通过率提升22%</li>
+          <li>2022年双十一，毛衣品类在公司所有品牌中销售排名第13，翻单款占比达35%+</li>
+          <li>建立完整快反供应链体系：T恤翻单最短9天出货，毛衣最短13天出货</li>
+          <li>主导印花价格标准体系建设，成果获采购部门认可并持续沿用至今</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects" class="bg-white">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-tag">PROJECTS</p>
+      <h2 class="section-title">项目经历</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+      <div class="proj-card">
+        <div class="proj-header">
+          <div class="proj-title">更新T恤面料项目</div>
+          <div class="proj-meta">项目负责人 · 2021.10 — 2021.12</div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-label">背景</div>
+          <div class="proj-text">市场高端品牌开始使用厚棉面料，公司决定对原有面料进行升级优化，提升品牌T恤的品质感与竞争力。</div>
+          <div class="proj-label">成果</div>
+          <div class="proj-text">筛选出多款升级面料，其中最具性价比的系列持续沿用至今，翻单不断。</div>
+          <div class="tags">
+            <span class="tag">面料开发</span><span class="tag">供应链</span><span class="tag">成本优化</span>
+          </div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-header">
+          <div class="proj-title">快速翻单时间改进项目</div>
+          <div class="proj-meta">项目负责人 · 2021.06 — 2021.10</div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-label">背景</div>
+          <div class="proj-text">原有供应商无法满足快节奏开发需求，需引入新供应商资源以提升供应链整体反应速度。</div>
+          <div class="proj-label">成果</div>
+          <div class="proj-text">评估30+家候选供应商，成功引入5家优质供应商合作至今，显著提升快反速度，增强产品竞争力。</div>
+          <div class="tags">
+            <span class="tag">供应商开发</span><span class="tag">快反体系</span><span class="tag">项目管理</span>
+          </div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-header">
+          <div class="proj-title">印花价格标准制定</div>
+          <div class="proj-meta">项目负责人 · 2019.11 — 2019.12</div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-label">背景</div>
+          <div class="proj-text">原有报价体系不够精细，需建立更精确的成本评估标准，以支撑采购决策，提升核价精准度。</div>
+          <div class="proj-label">成果</div>
+          <div class="proj-text">深入工厂实地调研，设计细分拆分定价标准，获采购部门认可并持续执行至今。</div>
+          <div class="tags">
+            <span class="tag">成本管理</span><span class="tag">标准化建设</span><span class="tag">供应链</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Education -->
+<section id="education" class="bg-slate">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-tag">EDUCATION</p>
+      <h2 class="section-title">教育背景</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="edu-card">
+      <div>
+        <div class="edu-school">东北林业大学</div>
+        <div class="edu-badge">211 重点院校</div>
+      </div>
+      <div class="edu-item"><label>专业</label><p>市场营销</p></div>
+      <div class="edu-item"><label>学历</label><p>本科（学士学位）</p></div>
+      <div class="edu-item"><label>在读时间</label><p>2006.09 — 2010.07</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="contact-section">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-tag">CONTACT</p>
+      <h2 class="section-title">联系我</h2>
+      <div class="section-line" style="margin: 0 auto 16px;"></div>
+    </div>
+    <p class="contact-desc">期待与您交流，探讨合作可能</p>
+    <div class="contact-cards">
+      <a href="mailto:gaoxinyue71@hotmail.com" class="contact-card">
+        <span class="contact-icon">✉️</span>
+        <div><div class="contact-card-label">邮箱</div><div class="contact-card-val">gaoxinyue71@hotmail.com</div></div>
+      </a>
+      <div class="contact-card">
+        <span class="contact-icon">📍</span>
+        <div><div class="contact-card-label">求职地点</div><div class="contact-card-val">北京</div></div>
+      </div>
+    </div>
+    <footer>© 2025 高新越 · 采销经理 · 时装买手</footer>
+  </div>
+</section>
+
+</body>
+</html>
