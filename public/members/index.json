@@ -4,7 +4,7 @@
   { "name": "高若涵", "id": "gao-ruohan" },
   { "name": "李莉", "id": "li-li" },
   { "name": "Koi", "id": "koi" },
-  { "name": "陈冠宇", "id": "chen-guanyu" },
+  { "name": "陈冠宇", "id": "chen-guanyu", "hasPage": true },
   { "name": "赵红文", "id": "zhao-hongwen" },
   { "name": "Sharon", "id": "sharon" },
   { "name": "Billy", "id": "billy" },
