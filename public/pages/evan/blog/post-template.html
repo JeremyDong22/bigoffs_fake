@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文章标题 — Evan 鲁</title>
+  <script>
+    (function(){
+      var t = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav container">
+      <a href="../index.html" class="nav__logo">Evan 鲁</a>
+      <ul class="nav__links">
+        <li><a href="../index.html#projects">项目</a></li>
+        <li><a href="../blog.html">文章</a></li>
+        <li><a href="../index.html#contact">联系</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换深色模式"></button>
+    </nav>
+  </header>
+
+  <main>
+    <article class="post container container--narrow">
+      <header class="post__header">
+        <a href="../blog.html" class="post__back">← 所有文章</a>
+        <time class="post__date">2026年4月14日</time>
+        <h1 class="post__title">这是一篇示例文章的标题</h1>
+      </header>
+
+      <div class="post__body">
+        <p>
+          这里是文章正文的开头段落。你可以在这里写任何你想分享的内容——技术心得、项目复盘、读书笔记，或者生活随想。
+        </p>
+
+        <h2>第一个小节</h2>
+        <p>
+          正文内容继续。段落之间会自动保持合适的间距，阅读体验舒适。
+        </p>
+        <p>
+          你也可以在文章中插入 <code>行内代码</code>，或者使用代码块展示较长的代码片段：
+        </p>
+
+        <pre><code>function greet(name) {
+  return `Hello, ${name}!`;
+}
+
+console.log(greet('World'));
+</code></pre>
+
+        <h2>第二个小节</h2>
+        <p>支持列表：</p>
+        <ul>
+          <li>第一条要点</li>
+          <li>第二条要点</li>
+          <li>第三条要点</li>
+        </ul>
+
+        <blockquote>
+          这是一段引用文字，可以用来突出重要的观点或者引用他人的话。
+        </blockquote>
+
+        <p>
+          文章结尾。感谢阅读，欢迎通过邮件或社交媒体与我交流。
+        </p>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer container">
+    <span>© 2026 Evan 鲁</span>
+    <span>用 HTML、CSS 和 JS 构建，无框架依赖。</span>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
